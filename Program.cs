@@ -13,7 +13,8 @@ namespace SqliteDemo
         {
             var dbWork = new DbController("Data Source=MyDatabase.sqlite;Version=3;");
             var dbTest = new DbController("Data Source=MyDatabaseTest.sqlite;Version=3;");
-            
+            var dbVariate = new DbController("Data Source=MyDatabaseVariate.sqlite;Version=3;");
+
             dbWork.Query(@"CREATE TABLE IF NOT EXISTS Tracking (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                                 score INT)");
@@ -21,10 +22,15 @@ namespace SqliteDemo
                                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                                 score INT)");
 
+            dbVariate.Query(@"CREATE TABLE IF NOT EXISTS TrackingTest (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                                score INT)");
+
             for (int i = 0; i < 10; i++)
             {
                 dbWork.Query($"INSERT INTO Tracking (score) VALUES ({i})");
                 dbTest.Query($"INSERT INTO TrackingTest (score) VALUES ({i + 1})");
+                dbVariate.Query($"INSERT INTO TrackingTest (score) VALUES ({i + 1})");
             }
 
         }
